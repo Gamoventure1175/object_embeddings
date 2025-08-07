@@ -74,3 +74,10 @@ Desktop.ini
 .mypy_cache/
 .dmypy.json
 .pyre/
+
+
+# Embeddings
+embeddings
+
+# Detected Faces
+detected_faces
