@@ -1,0 +1,1 @@
+yolox @ git+https://github.com/ifzhang/ByteTrack.git@d1bf0191adff59bc8fcfeaa0b33d3d1642552a99
