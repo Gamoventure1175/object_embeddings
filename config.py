@@ -24,7 +24,7 @@ CONFIG: Dict[str, Any] = {
     "CSV_LOG_PATH": "recognitions_log.csv",
 
     # ---------------- Video Settings ----------------
-    "VIDEO_PATH": "media/videos/switzerland_tours.mp4",  # Input video file path
+    "VIDEO_PATH": "media/videos/camera_footage/CH1_20250812172804-20250812173024.mp4",  # Input video file path
     "DISPLAY": True,                           # Show video output
     "OUTPUT_PATH": None,                       # Save output video to file (you have to provide a path or None to disable)
     "MODEL_INPUT_SIZE": (640, 640),            # YOLO/Tracker model input size
