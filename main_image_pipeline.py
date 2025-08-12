@@ -5,10 +5,10 @@ from matcher.annoy_matcher import AnnoyFaceMatcher
 import cv2
 
 # ==== CONFIG ====
-IMG_PATH = "media/photos/tom_holland3.jpg"
+IMG_PATH = "media/photos/zendaya.jpg"
 REGISTER_MODE = False        # True = register new faces, False = match faces
 PERSON_NAME = "Tom Holland"  # Used only if REGISTER_MODE=True
-MATCH_THRESHOLD = 1.5        # Euclidean distance threshold for matching
+MATCH_THRESHOLD = 1.2        # Euclidean distance threshold for matching
 TOP_K = 3                    # Number of nearest neighbors to retrieve in matching
 # =================
 
