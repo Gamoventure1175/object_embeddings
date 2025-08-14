@@ -42,43 +42,35 @@ recognitions_log.csv
 
 # ------------------
 # Generated embeddings / index / meta
-# These are runtime-generated and should not be tracked
 face_embeddings.npy
 faces.ann
 faces_meta.json
-
-# Any .npy/.ann/.json in project root or runtime folders (but allow source code JSON configs)
+person_stats.json
 *.npy
 *.ann
-faces_meta.json
-person_stats.json
 
 # ------------------
 # Registered images folder
-# ------------------
 registered_faces/
 
 # ------------------
-# Media output / temp files
+# Media folder structure only
+media/images/*
+media/videos/*
+
+# Keep folder placeholders so structure stays
+!media/images/.gitkeep
+!media/videos/.gitkeep
+
 # ------------------
+# Other generated output / temp files
 output/
 *.mp4
 *.avi
 *.jpg
 *.png
 
-# Keep static reference images if needed
-!media/images/*.jpg
-!media/images/*.png
-
-# Ignore all files inside media except static images above
-media/*
-!media/images/
-!media/images/*.jpg
-!media/images/*.png
-
 # ------------------
 # IDE / editor files
-# ------------------
 .vscode/
 .idea/
