@@ -12,7 +12,7 @@ CONFIG: Dict[str, Any] = {
     "MATCH_EVERY_N": 5,
 
     # Recognition distance threshold
-    "MATCH_THRESHOLD": 1.2,
+    "MATCH_THRESHOLD": 1.1,
 
     # Path to your embeddings file and the meta data file for the embeddings
     "EMBEDDINGS_PATH": "face_embeddings.npy",
@@ -24,9 +24,21 @@ CONFIG: Dict[str, Any] = {
     "CSV_LOG_PATH": "recognitions_log.csv",
 
     # ---------------- Video Settings ----------------
-    "VIDEO_PATH": "media/videos/camera_footage/CH1_20250812172804-20250812173024.mp4",  # Input video file path
+    "VIDEO_PATH": "media/videos/switzerland.mp4",  # Input video file path
     "DISPLAY": True,                           # Show video output
     "OUTPUT_PATH": None,                       # Save output video to file (you have to provide a path or None to disable)
     "MODEL_INPUT_SIZE": (640, 640),            # YOLO/Tracker model input size
-    "TOP_K": 1                                 # How many top matches to return from matcher
+    "TOP_K": 1,                                # How many top matches to return from matcher
+
+    # ---------------- Image Settings ----------------
+    "IMG_PATH": 'media/images/bradpitt2.jpg',
+    "PERSON_NAME": 'New Person',
+    "SAVE_ANNOTATED_IMAGE": None,
+    
+    # ---------------- Image Paths ----------------
+    "INDEX_PATH": 'faces.ann',
+    "META_PATH": 'faces_meta.json',
+    'EMBEDDINGS_PATH': 'face_embeddings.npy',
+    'VECTOR_SIZE': 512,
+    'ANNOY_TREES': 10 
 }

@@ -36,14 +36,14 @@ class ArcFaceEmbedder:
         embeddings = []
         for det in detections:
             x1, y1, x2, y2 = map(int, det[:4])
-            face_crop = img[y1:y2, x1:x2]
+            face_crop = img[y1:y2, x1:x2] # type:ignore
             emb = self.get_embedding_from_crop(face_crop)
             embeddings.append(emb)
         return embeddings
 
 
 if __name__ == "__main__":
-    img_path = "media/photos/tom_holland.jpg"
+    img_path = "media/images/bradpitt.jpg"
 
     # Step 1: Detect faces with YOLO
     detector = YOLOv11FaceDetector()

@@ -1,6 +1,9 @@
 # trackers/track_manager.py
 from typing import Dict, List, Optional
-from config import MATCH_EVERY_N, STABLE_FRAMES
+from config import CONFIG
+
+MATCH_EVERY_N = CONFIG['MATCH_EVERY_N']
+STABLE_FRAMES = CONFIG['STABLE_FRAMES']
 
 class TrackManager:
     """

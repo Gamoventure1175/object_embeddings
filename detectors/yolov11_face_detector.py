@@ -2,7 +2,6 @@
 
 from ultralytics import YOLO
 import cv2
-
 class YOLOv11FaceDetector:
     def __init__(self, model_path="models/yolov11n-face.pt", conf_thresh=0.3):
         """
@@ -42,7 +41,7 @@ class YOLOv11FaceDetector:
 
 if __name__ == "__main__":
     detector = YOLOv11FaceDetector("models/yolov11n-face.pt", conf_thresh=0.3)
-    test_img = "media/photos/tom_holland.jpg"  # path to any face image
+    test_img = "media/images/bradpitt.jpg"  # path to any face image
     detections = detector.detect_faces(test_img)
     print("Detections:", detections)
     detector.visualize(test_img, detections, "detected_faces.jpg")
