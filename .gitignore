@@ -1,115 +1,72 @@
-.venv
-# Byte-compiled / optimized / DLL files
+# ------------------
+# Python cache / env
+# ------------------
 __pycache__/
 *.py[cod]
-*$py.class
-
-# C extensions
-*.so
+*.pyo
 *.pyd
+*.pkl
+*.so
 *.dll
 
-# Distribution / packaging
-.Python
-env/
-venv/
+# Virtual environments
 .venv/
+venv/
+env/
 ENV/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
-*.whl
-pip-wheel-metadata/
-*.manifest
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
-
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-media/
-staticfiles/
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# FastAPI / Starlette:
-__pydantic__/  # Custom generated model cache (if any)
-
-# Translations
-*.mo
-*.pot
-
-# VS Code
-.vscode/
-
-# PyCharm
-.idea/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# dotenv
-.env
-.env.*
-*.env
-
-# MyPy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre
-.pyre/
-
-# Pytype
-.pytype/
-
-# Pyright
-pyrightconfig.json
-
-# profiling
-prof/
-
-# Coverage reports
-htmlcov/
-
-# System files
+# ------------------
+# OS generated files
+# ------------------
 .DS_Store
 Thumbs.db
 
-# Git
-*.orig
-*.swp
-*.swo
-*.bak
-*.tmp
+# ------------------
+# Logs & CSV outputs
+# ------------------
+*.log
+*.csv
+recognitions_log.csv
+
+# ------------------
+# Model weights / checkpoints
+# ------------------
+*.pt
+*.onnx
+*.pb
+*.h5
+*.ckpt
+
+# ------------------
+# Generated embeddings / index / meta
+# ------------------
+face_embeddings.npy
+faces.ann
+faces_meta.json
+
+# ------------------
+# Registered images folder
+# ------------------
+registered_faces/
+
+# ------------------
+# Media output / temp files
+# ------------------
+output/
+*.mp4
+*.avi
+*.jpg
+*.png
+
+# Keep source reference images if needed
+!media/images/*.jpg
+!media/images/*.png
+
+# ------------------
+# IDE / editor files
+# ------------------
+.vscode/
+.idea/
