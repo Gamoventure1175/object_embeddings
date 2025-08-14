@@ -25,15 +25,13 @@ ENV/
 Thumbs.db
 
 # ------------------
-# Logs & CSV outputs
-# ------------------
+# Logs & CSV outputs (runtime generated)
 *.log
 *.csv
 recognitions_log.csv
 
 # ------------------
 # Model weights / checkpoints
-# ------------------
 *.pt
 *.onnx
 *.pb
@@ -41,7 +39,7 @@ recognitions_log.csv
 *.ckpt
 
 # ------------------
-# Generated embeddings / index / meta
+# Generated embeddings / index / meta (runtime generated)
 face_embeddings.npy
 faces.ann
 faces_meta.json
@@ -54,11 +52,11 @@ person_stats.json
 registered_faces/
 
 # ------------------
-# Media folder structure only
+# Media folder structure only (keep empty folders)
 media/images/*
 media/videos/*
 
-# Keep folder placeholders so structure stays
+# Keep folder placeholders so structure stays in repo
 !media/images/.gitkeep
 !media/videos/.gitkeep
 
