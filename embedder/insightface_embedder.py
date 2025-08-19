@@ -21,15 +21,20 @@ class ArcFaceEmbedder:
             return emb
         return emb / norm
 
-    def get_embedding_from_crop(self, face_crop):
-        # Convert to RGB and resize for ArcFace
+    def get_embedding_from_crop(self, face_crop, tta_flip=True):
         face_rgb = cv2.cvtColor(face_crop, cv2.COLOR_BGR2RGB)
         face_rgb = cv2.resize(face_rgb, (112, 112))
-        # Get raw embedding
+
         emb = self.rec_model.get_feat(face_rgb).flatten()
-        # Normalize
+
+        if tta_flip:
+            face_flip = cv2.flip(face_rgb, 1)
+            emb_flip = self.rec_model.get_feat(face_flip).flatten()
+            emb = 0.5 * (emb + emb_flip)
+
         emb = self._normalize_embedding(emb)
         return emb
+
 
     def get_embeddings_from_image(self, image_path, detections):
         img = cv2.imread(image_path)

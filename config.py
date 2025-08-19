@@ -1,44 +1,37 @@
 from typing import Dict, Any
 
 CONFIG: Dict[str, Any] = {
-    # ---------------- Face Recognition Settings ----------------
-    # Auto-register new unknown faces
-    "AUTO_REGISTER_UNKNOWN": True,
+    # ---------------- Face Detection ----------------
+    "MODEL_INPUT_SIZE": (640, 640),            # YOLO input size
+    "AUTO_REGISTER_UNKNOWN": True,             # Register unknowns automatically
+    "STABLE_FRAMES": 5,                        # Require stable ID across frames
 
-    # Require the same ID to be detected in N consecutive frames before confirming
-    "STABLE_FRAMES": 3,
+    # ---------------- Embedding & Matching ----------------
+    "VECTOR_SIZE": 512,                        # ArcFace embedding size
+    "ANNOY_TREES": 10,                         # Annoy index trees
+    "MATCH_THRESHOLD": 0.90,                   # Stricter distance threshold
+    "MATCH_RATIO": 0.85,                       # Ratio test (best/second-best)
+    "MARGIN_DIFF": 0.05,                       # Minimum margin between best & 2nd
+    "MATCH_EVERY_N": 5,                        # Check embeddings every N frames
+    "TOP_K": 1,                                # Only take best match
 
-    # Only re-check embeddings every N frames per track
-    "MATCH_EVERY_N": 5,
+    # ---------------- Persistence Paths ----------------
+    "INDEX_PATH": "faces.ann",                 # Annoy index file
+    "META_PATH": "faces_meta.json",            # Face metadata
+    "EMBEDDINGS_PATH": "face_embeddings.npy",  # Stored embeddings
+    "REGISTERED_IMG_DIR": "registered_faces",  # Saved crops of faces
 
-    # Recognition distance threshold
-    "MATCH_THRESHOLD": 1.1,
+    # ---------------- Image Mode ----------------
+    "IMG_PATH": "media/images/bradpitt2.jpg",  # Default input image
+    "PERSON_NAME": "New Person",               # Label when registering
+    "SAVE_ANNOTATED_IMAGE": None,              # Path to save annotated output
+    "DISPLAY": True,                           # Show image output
 
-    # Path to your embeddings file and the meta data file for the embeddings
-    "EMBEDDINGS_PATH": "face_embeddings.npy",
-    "META_PATH": "faces_meta.json",
-
+    # ---------------- Video Mode ----------------
+    "VIDEO_PATH": "media/videos/switzerland.mp4",
+    "OUTPUT_PATH": None,                       # Save output video (None=disable)
 
     # ---------------- Logging ----------------
     "LOG_TO_CSV": True,
     "CSV_LOG_PATH": "recognitions_log.csv",
-
-    # ---------------- Video Settings ----------------
-    "VIDEO_PATH": "media/videos/switzerland.mp4",  # Input video file path
-    "DISPLAY": True,                           # Show video output
-    "OUTPUT_PATH": None,                       # Save output video to file (you have to provide a path or None to disable)
-    "MODEL_INPUT_SIZE": (640, 640),            # YOLO/Tracker model input size
-    "TOP_K": 1,                                # How many top matches to return from matcher
-
-    # ---------------- Image Settings ----------------
-    "IMG_PATH": 'media/images/bradpitt2.jpg',
-    "PERSON_NAME": 'New Person',
-    "SAVE_ANNOTATED_IMAGE": None,
-    
-    # ---------------- Image Paths ----------------
-    "INDEX_PATH": 'faces.ann',
-    "META_PATH": 'faces_meta.json',
-    'EMBEDDINGS_PATH': 'face_embeddings.npy',
-    'VECTOR_SIZE': 512,
-    'ANNOY_TREES': 10 
 }

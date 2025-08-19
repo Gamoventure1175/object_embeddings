@@ -1,0 +1,11 @@
+1) Register all images in a folder
+python main_image_pipeline.py --register-folder path/to/folder
+
+2) Match all images in a folder against the registered database
+python main_image_pipeline.py --match-folder path/to/folder
+
+3) Reset everything (start from scratch)
+python main_image_pipeline.py --reset-db
+
+4) Default mode: single-image pipeline
+python main_image_pipeline.py

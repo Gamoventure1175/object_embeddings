@@ -25,7 +25,7 @@ EMB_PATH        = CONFIG.get("EMBEDDINGS_PATH", "face_embeddings.npy")
 VECTOR_SIZE     = CONFIG.get("VECTOR_SIZE", 512)
 N_TREES         = CONFIG.get("ANNOY_TREES", 10)
 
-REGISTERED_IMG_DIR = "registered_faces"  # folder to save registered cropped faces
+REGISTERED_IMG_DIR = "registered_faces"
 # --------------------------------------------------
 
 
@@ -46,6 +46,21 @@ def save_registered_face_image(name, crop_img):
     ensure_dir(REGISTERED_IMG_DIR)
     save_path = os.path.join(REGISTERED_IMG_DIR, name)
     cv2.imwrite(save_path, crop_img)
+
+
+# ---------- Quality Gate ----------
+def is_crop_usable(crop, min_size=64, blur_thresh=60, brightness_thresh=50):
+    h, w = crop.shape[:2]
+    if h < min_size or w < min_size:
+        return False, f"too small ({w}x{h})"
+    gray = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
+    blur_score = cv2.Laplacian(gray, cv2.CV_64F).var()
+    if blur_score < blur_thresh:
+        return False, f"too blurry (var={blur_score:.1f})"
+    if gray.mean() < brightness_thresh:
+        return False, f"too dark (mean={gray.mean():.1f})"
+    return True, None
+# ----------------------------------
 
 
 def register_from_folder(folder_path):
@@ -82,6 +97,12 @@ def register_from_folder(folder_path):
             if not bbox:
                 continue
             crop = img[bbox[1]:bbox[3], bbox[0]:bbox[2]]
+
+            usable, reason = is_crop_usable(crop)
+            if not usable:
+                print(f" - Skipping {os.path.basename(img_path)}: {reason}")
+                continue
+
             emb = embedder.get_embedding_from_crop(crop)
             name = os.path.basename(img_path)
             matcher.register(name, emb)
@@ -125,6 +146,12 @@ def match_from_folder(folder_path):
             if not bbox:
                 continue
             crop = img[bbox[1]:bbox[3], bbox[0]:bbox[2]]
+
+            usable, reason = is_crop_usable(crop)
+            if not usable:
+                print(f" - Skipping {os.path.basename(img_path)}: {reason}")
+                continue
+
             emb = embedder.get_embedding_from_crop(crop)
             results = matcher.match(emb, top_k=TOP_K)
 
@@ -140,13 +167,11 @@ def match_from_folder(folder_path):
                     cv2.imshow("Query | Match", combined)
                     cv2.waitKey(0)
             else:
-                # No match found — auto-register
                 new_name = f"auto_{len(matcher.meta)}.jpg"
                 matcher.register(new_name, emb)
                 save_registered_face_image(new_name, crop)
                 print(f"🆕 No match found. Auto-registered as {new_name}")
     cv2.destroyAllWindows()
-
 
 
 def main():
@@ -204,6 +229,11 @@ def main():
             print(f" - Face {i}: empty crop, skipping.")
             continue
 
+        usable, reason = is_crop_usable(crop)
+        if not usable:
+            print(f" - Face {i}: {reason}, skipping.")
+            continue
+
         try:
             emb = embedder.get_embedding_from_crop(crop)
         except Exception as e:
@@ -255,12 +285,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.reset_db:
-        # Delete Annoy DB, meta, embeddings
         for path in [META_PATH, INDEX_PATH, EMB_PATH]:
             if os.path.exists(path):
                 os.remove(path)
                 print(f"🗑️ Deleted {path}")
-        # Delete registered images folder
         if os.path.exists(REGISTERED_IMG_DIR):
             shutil.rmtree(REGISTERED_IMG_DIR)
             print(f"🗑️ Deleted folder {REGISTERED_IMG_DIR}")
@@ -273,4 +301,3 @@ if __name__ == "__main__":
         match_from_folder(args.match_folder)
     else:
         main()
-
