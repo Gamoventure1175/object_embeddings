@@ -46,7 +46,7 @@ class AnnoyFaceMatcher:
         self.next_id = 0
 
         # in-memory Annoy index
-        self.index = AnnoyIndex(self.vector_size, "euclidean")
+        self.index = AnnoyIndex(self.vector_size, "angular")
 
     # ---------------------------
     # Disk I/O helpers
