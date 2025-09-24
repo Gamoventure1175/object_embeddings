@@ -48,6 +48,12 @@ class ArcFaceEmbedder:
 
 
 if __name__ == "__main__":
+    import inspect, insightface
+    from insightface.model_zoo import ArcFaceONNX
+    print(inspect.getsource(ArcFaceONNX))   # if source is available
+    print([m for m in dir(ArcFaceONNX) if not m.startswith('_')])
+    
+
     img_path = "media/images/bradpitt.jpg"
 
     # Step 1: Detect faces with YOLO

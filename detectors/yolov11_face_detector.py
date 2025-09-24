@@ -10,6 +10,7 @@ class YOLOv11FaceDetector:
         """
         self.model = YOLO(model_path)
         self.conf_thresh = conf_thresh
+        # print(self.model.val()) #Evaluate the model's performance on the validation set
 
     def detect_faces(self, image_path):
         """
